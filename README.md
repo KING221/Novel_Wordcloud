@@ -23,8 +23,10 @@ def cut_cache():
             f.write('{0}\t{1}\n'.format(x[0],x[1]))
 ```
   引入部分```jieba.posseg```可以对分词的词性进行分析。上面的函数，是「分词+词云」的第一步，对文本进行分词，并且添加词性（方便进一步筛选），写进本地txt，作为缓存文件（因为文本量太大了，不可能每次都重新读取，这样很花时间，所以需要一个缓存）。
-  
-    ```story_with_attr = [(x.word, x.flag) for x in psg.cut(file) if len(x.word) >= 2] ```
+
+```
+story_with_attr = [(x.word, x.flag) for x in psg.cut(file) if len(x.word) >= 2] 
+```
     
   这里用了一个列表存储起了《火焰杯》小说里的所有词+词性。```psg.cut(file)```是默认词性标注分词器（其实是```jieba.posseg```，但在引用部分为了方便，所以写成了```psg```），使用了for循环，针对单个词+词性，然后用了if语句排除掉长度<2的词（的地得你我他……）。```（x.word, x.flag）```是固定写法。
     
